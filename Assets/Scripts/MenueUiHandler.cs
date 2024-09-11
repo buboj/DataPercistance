@@ -5,16 +5,17 @@ using System.Collections;
 using TMPro;
 
 public class MenueUiHandler : MonoBehaviour
-{   static string inputname;
+{   
     GameObject errorMessage;
+    string inputPlayer;
 
-    private void Start() {
+    private void Start(){
         errorMessage = GameObject.Find("NeedToEnterNAmeText");
         DisableFuckingText();
     }
 
     public void StartNew(){
-        if (inputname != null){
+        if (inputPlayer != null && inputPlayer != ""){
             SceneManager.LoadScene(1);}
         else{
             errorMessage.GetComponent<TextMeshProUGUI>().enabled = true;
@@ -35,16 +36,13 @@ public class MenueUiHandler : MonoBehaviour
     }
 
     public void ReadName(string s){
-        inputname = s;
-        Debug.Log("The Name is: " + inputname);
+        GameManager.Instance.playerName = s;
+        inputPlayer = s;
     }
 
-    IEnumerator ErrorTimer()
-    {
+    IEnumerator ErrorTimer(){
         yield return new WaitForSeconds(2);
         DisableFuckingText();
     }
-
-
 
 }
