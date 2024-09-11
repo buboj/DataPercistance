@@ -41,7 +41,7 @@ public class MenueUiHandler : MonoBehaviour
 
     IEnumerator ErrorTimer()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         DisableFuckingText();
     }
 
