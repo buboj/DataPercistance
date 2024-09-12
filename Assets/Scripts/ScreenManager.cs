@@ -13,7 +13,7 @@ public class ScreenManager : MonoBehaviour
     public Text ScoreText;
 
     public Text BestScoreText;
-    // string playerName;
+    public int bestScoreGame;
     public GameObject GameOverText;
     
     private bool m_Started = false;
