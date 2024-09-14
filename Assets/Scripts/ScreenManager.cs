@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +12,8 @@ public class ScreenManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-    public Text ScoreText;
-    public Text BestScoreText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI BestScoreText;
     public GameObject GameOverText; 
     private bool m_Started = false;
     public int m_Points;
@@ -25,7 +26,6 @@ public class ScreenManager : MonoBehaviour
         BestScoreText.text = "Best Score: " + GameManager.Instance.bestPlayerName + GameManager.Instance.bestScore;
         ScoreText.text = "Your Score : " + m_Points;
         m_Points = 0;
-
         int perLine = Mathf.FloorToInt(4.0f / step);
         int[] pointCountArray = new [] {1,1,2,2,5,5};
         for (int i = 0; i < LineCount; ++i){
@@ -37,7 +37,6 @@ public class ScreenManager : MonoBehaviour
             }
         }
     }
-
 
     private void Update(){
         if (!m_Started){
@@ -59,12 +58,14 @@ public class ScreenManager : MonoBehaviour
 
     void AddPoint(int point){
         m_Points += point;
-        GameManager.Instance.currentScore = m_Points;
         ScoreText.text = $"Your Score : {m_Points}";
         if (m_Points > GameManager.Instance.bestScore){
+            Debug.Log("Ist Es (nicht!!!)");
             GameManager.Instance.bestScore = m_Points;
+            GameManager.Instance.bestPlayerName = GameManager.Instance.playerName;
+            BestScoreText.text = $"Best Score : {GameManager.Instance.playerName} : {GameManager.Instance.bestScore}";
         }
-        BestScoreText.text = $"Best Score : {GameManager.Instance.playerName} : {GameManager.Instance.bestScore}";
+        
     }
 
     public void GameOver(){

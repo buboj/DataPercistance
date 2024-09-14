@@ -28,7 +28,6 @@ public class CycleTextColors : MonoBehaviour
         if (h >= 1){
             h = 0;
         }
-        Debug.Log(h);
         return Color.HSVToRGB(h, s, v);
     }
 

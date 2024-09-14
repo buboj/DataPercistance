@@ -8,10 +8,13 @@ public class MenueUiHandler : MonoBehaviour
 {   
     GameObject errorMessage;
     string inputPlayer;
+    public TextMeshProUGUI BestMenueText;
 
     private void Start(){
+        GameManager.Instance.LoadNameScore();
         errorMessage = GameObject.Find("NeedToEnterNAmeText");
         DisableFuckingText();
+        BestMenueText.text = "Best Score: " + GameManager.Instance.bestPlayerName + " : " + GameManager.Instance.bestScore;
     }
 
     public void StartNew(){
@@ -28,6 +31,7 @@ public class MenueUiHandler : MonoBehaviour
     }
 
     public void Exit(){
+        GameManager.Instance.SaveNameScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
@@ -38,6 +42,7 @@ public class MenueUiHandler : MonoBehaviour
     public void ReadName(string s){
         GameManager.Instance.playerName = s;
         inputPlayer = s;
+        StartNew();
     }
 
     IEnumerator ErrorTimer(){
