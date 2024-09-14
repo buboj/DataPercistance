@@ -1218,6 +1218,7 @@ MonoBehaviour:
   playerName: 
   bestPlayerName: 
   bestScore: 0
+  oldBestScore: 0
   currentScore: 0
 --- !u!4 &847214042
 Transform:
@@ -2013,7 +2014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Most Basic Knockout
+  m_text: The Most Basic Arkanoid
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
