@@ -9,14 +9,16 @@ public class GameManager : MonoBehaviour
     public string playerName;
     public string bestPlayerName;
     public int bestScore;
+    public int currentScore = 0;
 
-    void Start(){
+    void Awake(){
         if (Instance != null){
             Destroy(gameObject);
             return;
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadNameScore();
     }
 
     [System.Serializable]
@@ -24,16 +26,6 @@ public class GameManager : MonoBehaviour
         public string nameToSave;
         public int scoreToSave;
     }
-
-    /*
-    Zu müde grad. puh.
-    Habe die class und die methods eingebaut um Score und Namen zu speichern.
-    Die werden aber noch nirgends aufgerufen.
-    Auch fehlt noch die Logik, die den best score mit dem current score abgleicht.
-    Ich hatte mir das so gedacht, dass sobald der current score höher ist als der highscore,
-    soll auch beim laufenden spiel das aktualisiert werden.
-    Und dann geschrieben selbstverständlich.
-    */
 
     public void SaveNameScore(){
         SaveData data = new SaveData();
@@ -52,6 +44,10 @@ public class GameManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             bestPlayerName = data.nameToSave;
             bestScore = data.scoreToSave;
+        }
+        else{
+            bestScore = 0;
+            bestPlayerName = "No One Yet!";
         }
     }
 }

@@ -1,32 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScreenManager : MonoBehaviour
+
 {
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-
     public Text ScoreText;
-
     public Text BestScoreText;
-    public int bestScoreGame;
-    public GameObject GameOverText;
-    
+    public GameObject GameOverText; 
     private bool m_Started = false;
-    private int m_Points;
-    
-    private bool m_GameOver = false;
+    public int m_Points;
+    bool m_GameOver = false;
 
     
     // Start is called before the first frame update
     void Start(){
         const float step = 0.6f;
-        BestScoreText.text = "Best Score: " + GameManager.Instance.playerName + ": " + m_Points;
-        // playerName = name;
+        BestScoreText.text = "Best Score: " + GameManager.Instance.bestPlayerName + GameManager.Instance.bestScore;
+        ScoreText.text = "Your Score : " + m_Points;
+        m_Points = 0;
+
         int perLine = Mathf.FloorToInt(4.0f / step);
         int[] pointCountArray = new [] {1,1,2,2,5,5};
         for (int i = 0; i < LineCount; ++i){
@@ -38,6 +37,7 @@ public class ScreenManager : MonoBehaviour
             }
         }
     }
+
 
     private void Update(){
         if (!m_Started){
@@ -52,15 +52,19 @@ public class ScreenManager : MonoBehaviour
         }
         else if (m_GameOver){
             if (Input.GetKeyDown(KeyCode.Space)){
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(0);
             }
         }
     }
 
     void AddPoint(int point){
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
-        BestScoreText.text = "Best Score: " + GameManager.Instance.playerName + ": " + m_Points;
+        GameManager.Instance.currentScore = m_Points;
+        ScoreText.text = $"Your Score : {m_Points}";
+        if (m_Points > GameManager.Instance.bestScore){
+            GameManager.Instance.bestScore = m_Points;
+        }
+        BestScoreText.text = $"Best Score : {GameManager.Instance.playerName} : {GameManager.Instance.bestScore}";
     }
 
     public void GameOver(){
