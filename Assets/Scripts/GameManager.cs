@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public string bestPlayerName = "Kalle";
     public int bestScore = 0;
 
-    int oldBestScore;
+    public int oldBestScore;
     public int currentScore = 0;
 
     private void Start() {
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveNameScore(){
         if (bestScore > oldBestScore){
-            Debug.Log("Try to Save Game");
+            Debug.Log("Saveing Game");
             SaveData data = new SaveData();
             data.nameToSave = bestPlayerName;
             data.scoreToSave = bestScore;
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadNameScore(){
-        Debug.Log("Try to Load Game");
+        Debug.Log("Loading Game");
         string path = Application.persistentDataPath + "/saveNameScore.json";
         if (File.Exists(path)){
             string json = File.ReadAllText(path);

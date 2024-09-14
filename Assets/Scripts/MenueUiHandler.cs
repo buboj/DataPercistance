@@ -50,4 +50,13 @@ public class MenueUiHandler : MonoBehaviour
         DisableFuckingText();
     }
 
+    public void ResetHightscore(){
+        GameManager.Instance.bestPlayerName = "";
+        GameManager.Instance.bestScore = 0;
+        GameManager.Instance.oldBestScore =-1;
+        GameManager.Instance.SaveNameScore();
+        GameManager.Instance.LoadNameScore();
+        BestMenueText.text = "Best Score: " + GameManager.Instance.bestPlayerName + " : " + GameManager.Instance.bestScore;
+    }
+
 }
